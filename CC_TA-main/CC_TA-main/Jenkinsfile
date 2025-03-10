@@ -13,17 +13,13 @@ pipeline {
 
         stage('Build') {
             steps {
-                dir('CC_TA-main/CC_TA-main/main') { // Navigate to the correct folder
-                    sh 'g++ new_hello.cpp -o hello_exec'
-                }
+                sh 'g++ CC_TA-main/CC_TA-main/main/new_hello.cpp -o CC_TA-main/CC_TA-main/main/hello_exec'
             }
         }
 
         stage('Test') {
             steps {
-                dir('CC_TA-main/CC_TA-main/main') { // Run from correct directory
-                    sh './hello_exec'
-                }
+                sh './CC_TA-main/CC_TA-main/main/hello_exec'
             }
         }
 

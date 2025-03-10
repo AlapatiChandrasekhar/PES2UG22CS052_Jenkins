@@ -7,20 +7,23 @@ pipeline {
                 checkout([$class: 'GitSCM',
                     branches: [[name: '*/main']],
                     userRemoteConfigs: [[url: 'https://github.com/AlapatiChandrasekhar/PES2UG22CS052_Jenkins.git']]
-                ]])
+                ])
             }
         }
 
         stage('Build') {
             steps {
-                build 'PES2UG22CS052-1'
-                sh 'g++ main/new_hello.cpp -o hello_exec'  // Correct file path
+                dir('CC_TA-main/CC_TA-main/main') { // Navigate to the correct directory
+                    sh 'g++ new_hello.cpp -o hello_exec'
+                }
             }
         }
 
         stage('Test') {
             steps {
-                sh './hello_exec'  // Runs the compiled output
+                dir('CC_TA-main/CC_TA-main/main') { // Ensure we're in the right directory
+                    sh './hello_exec'
+                }
             }
         }
 
